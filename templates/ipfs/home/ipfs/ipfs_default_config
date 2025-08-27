@@ -187,9 +187,9 @@
     },
     "ConnMgr": {
       "Type": "basic",
-      "LowWater": {{ ipfs_connmgr_low_water }},
-      "HighWater": {{ ipfs_connmgr_high_water }},
-      "GracePeriod": "30s"
+      "LowWater": {{ ipfs_connmgr_low_water | default(32) }},
+      "HighWater": {{ ipfs_connmgr_high_water | default(96) }},
+      "GracePeriod": "{{ ipfs_connmgr_grace_period | default('30s') }}"
     },
     "ResourceMgr": {
       "MaxMemory": "{{ ipfs_resourcemgr_max_memory | default(0) }}"
