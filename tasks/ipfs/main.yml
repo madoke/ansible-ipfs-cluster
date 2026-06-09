@@ -4,6 +4,7 @@
     state: directory
     owner: root
     group: root
+    mode: 0755
     dest: /opt/kubo/{{ipfs_version}}
 
 - name: download and unpack IPFS
@@ -24,6 +25,15 @@
         dest: /opt/kubo/{{ipfs_version}}
         creates: /opt/kubo/{{ipfs_version}}/kubo
       notify: restart IPFS
+
+    - name: Ensure version-specific kubo subfolder is readable by ipfs user
+      become: yes
+      file:
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+        dest: /opt/kubo/{{ipfs_version}}/kubo
 
     - name: link kubo executable
       become: yes
@@ -59,7 +69,7 @@
     dest: /etc/init.d/ipfs
     owner: root
     group: root
-    mode: 0744
+    mode: 0755
   notify:
     - restart IPFS
   when:
