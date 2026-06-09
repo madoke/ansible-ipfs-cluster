@@ -4,6 +4,7 @@
     state: directory
     owner: root
     group: root
+    mode: 0755
     dest: /opt/ipfs-cluster/{{ipfs_cluster_version}}
 
 - name: download and unpack IPFS Cluster
@@ -26,6 +27,18 @@
         src: /opt/ipfs-cluster/{{ipfs_cluster_version}}/{{ item }}.tar.gz
         dest: /opt/ipfs-cluster/{{ipfs_cluster_version}}/
         creates: /opt/ipfs-cluster/{{ipfs_cluster_version}}/{{ item }}
+      with_items:
+        - ipfs-cluster-service
+        - ipfs-cluster-ctl
+
+    - name: Ensure permissions are 0755 for the subfolders
+      become: yes
+      file:
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+        dest: /opt/ipfs-cluster/{{ipfs_cluster_version}}/{{ item }}
       with_items:
         - ipfs-cluster-service
         - ipfs-cluster-ctl
@@ -65,7 +78,7 @@
     dest: /etc/init.d/ipfs-cluster
     owner: root
     group: root
-    mode: 0744
+    mode: 0755
   notify:
     - restart IPFS Cluster
   when:
