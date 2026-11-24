@@ -13,7 +13,7 @@
     - name: download IPFS Cluster
       become: yes
       get_url:
-        url: "{{ dist_url }}/{{ item }}/{{ipfs_cluster_version}}/{{ item }}_{{ipfs_cluster_version}}_linux-{{ipfs_cluster_arch}}.tar.gz"
+        url: "{{ dist_url }}/ipfs-cluster/ipfs-cluster/releases/download/{{ipfs_cluster_version}}/{{ item }}_{{ipfs_cluster_version}}_linux-{{ipfs_cluster_arch}}.tar.gz"
         dest: /opt/ipfs-cluster/{{ipfs_cluster_version}}/{{ item }}.tar.gz
         timeout: 30
       with_items:
