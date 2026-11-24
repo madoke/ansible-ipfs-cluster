@@ -13,7 +13,7 @@
     - name: download IPFS
       become: yes
       get_url:
-        url: "{{ dist_url }}/kubo/{{ipfs_version}}/kubo_{{ipfs_version}}_linux-{{ipfs_arch}}.tar.gz"
+        url: "{{ dist_url }}/ipfs/kubo/releases/download/{{ipfs_version}}/kubo_{{ipfs_version}}_linux-{{ipfs_arch}}.tar.gz"
         dest: /opt/kubo/{{ipfs_version}}/kubo.tar.gz
         timeout: 30
 
